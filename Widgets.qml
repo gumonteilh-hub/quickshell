@@ -9,6 +9,5 @@ Row {
     BluetoothWidget {}
     RamWidget {}
     CpuWidget {}
-
     PowerWidget {}
 }

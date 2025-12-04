@@ -1,4 +1,5 @@
 import QtQuick
+import "./style/"
 
 Row {
     anchors.horizontalCenter: parent.horizontalCenter
@@ -6,24 +7,22 @@ Row {
     Rectangle {
         height: 24
         width: contentRow.implicitWidth + 20
-        radius: 2
-        color: "#cba6f7"
+        radius: Theme.radiusLg
+        color: Theme.mauve
 
         Row {
             id: contentRow
             anchors.centerIn: parent
-            spacing: 8
-
+            spacing: 4
             Text {
                 anchors.verticalCenter: parent.verticalCenter
                 text: ""
-                color: "#11111b"
+                color: Theme.crust
             }
-
             Text {
                 anchors.verticalCenter: parent.verticalCenter
                 text: Time.time
-                color: "#11111b"
+                color: Theme.crust
             }
         }
     }
