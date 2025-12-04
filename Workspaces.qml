@@ -21,7 +21,7 @@ Row {
 
             Text {
                 anchors.centerIn: parent
-                text: workspace.modelData.id === Hyprland.focusedWorkspace.id ? "󱓻" : workspace.modelData.id
+                text: workspace.modelData.id === Hyprland.focusedWorkspace.id ? "󱓻" : workspace.modelData.id === -98 ? "S" : workspace.modelData.id
                 color: workspace.modelData.id === Hyprland.focusedWorkspace.id ? "#11111b" : "#cdd6f4"
             }
 

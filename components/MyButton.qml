@@ -2,15 +2,15 @@ import QtQuick
 import "../style/"
 
 Rectangle {
-    id: button
+    id: root
     required property string label
-    // property alias click: mouseArea.clicked
+    property string tooltip
+    signal clicked
+    readonly property alias hovered: mouseArea.containsMouse
 
     width: textArea.implicitWidth + Theme.paddingLg
     height: parent.height
-
     radius: Theme.radiusSm
-
     color: mouseArea.containsMouse ? Theme.surfaceHigh : Theme.surfaceLow
     border.width: 1
     border.color: Theme.borderSubtle
@@ -27,5 +27,6 @@ Rectangle {
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         anchors.fill: parent
+        onClicked: root.clicked()
     }
 }

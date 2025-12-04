@@ -14,31 +14,8 @@ Row {
       label: "test"
     }
 
-    Rectangle {
-        width: row.implicitWidth + 20
-        height: 24
-        radius: 2
-        color: "#313244"
-
-        Row {
-            id: row
-            anchors.centerIn: parent
-            spacing: 8
-
-            Text {
-                anchors.verticalCenter: parent.verticalCenter
-                text: "󰂯"
-                color: "white"
-            }
-
-            Text {
-                anchors.verticalCenter: parent.verticalCenter
-                text: Bluetooth.devices.values.length
-                color: "white"
-            }
-        }
-    }
-
+    BluetoothWidget {}
+    
     Rectangle {
         width: ram.implicitWidth + 20
         height: 24
