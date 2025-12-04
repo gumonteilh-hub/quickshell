@@ -4,6 +4,7 @@ import "../style/"
 Rectangle {
     id: root
     required property string label
+    property color labelColor: Theme.textPrimary
     property string tooltip
     signal clicked
     readonly property alias hovered: mouseArea.containsMouse
@@ -19,7 +20,7 @@ Rectangle {
         id: textArea
         anchors.centerIn: parent
         text: parent.label
-        color: Theme.textPrimary
+        color: root.labelColor
     }
 
     MouseArea {
