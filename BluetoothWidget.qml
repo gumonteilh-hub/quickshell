@@ -9,15 +9,15 @@ MyButton {
     id: bluetoothButton
     height: 24
     label: "󰂯 " + Bluetooth.devices.values.length
-    tooltip: "izi"
 
     Process {
         id: nmtuiOpen
-        command: ["ghostty", "-e", "bluetui"]
+        command: ["footclient", "-e", "bluetui"]
     }
 
     onClicked: {
-        nmtuiOpen.running = true;
+        if (!nmtuiOpen.running)
+            nmtuiOpen.running = true;
     }
 
     PopupWindow {

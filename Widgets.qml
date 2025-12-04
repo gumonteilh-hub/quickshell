@@ -1,8 +1,6 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell.Io
-import Quickshell.Bluetooth
-import "./components/"
 
 Row {
     anchors.right: parent.right
@@ -10,103 +8,9 @@ Row {
     anchors.margins: 6
     spacing: 5
 
-    MyButton {
-      label: "test"
-    }
-
     BluetoothWidget {}
-    
-    Rectangle {
-        width: ram.implicitWidth + 20
-        height: 24
-        radius: 2
-        color: "#313244"
-
-        Row {
-            id: ram
-            property string ramUsage: "0"
-            anchors.centerIn: parent
-            spacing: 8
-            Timer {
-                interval: 2000
-                running: true
-                repeat: true
-                onTriggered: ramProcess.running = true
-            }
-
-            Process {
-                id: ramProcess
-
-                command: ["bash", "-c", "free | awk '/^Mem/ {printf(\"%.0f\", $3/$2 * 100)}'"]
-
-                stdout: SplitParser {
-                    onRead: data => {
-                        ram.ramUsage = data;
-                    }
-                }
-            }
-            Text {
-                anchors.verticalCenter: parent.verticalCenter
-                text: ""
-                color: "white"
-            }
-            Text {
-                anchors.verticalCenter: parent.verticalCenter
-                text: ram.ramUsage + "%"
-                color: "white"
-            }
-        }
-        Text {
-            anchors.centerIn: parent
-        }
-    }
-
-    Rectangle {
-        width: cpu.implicitWidth + 20
-        height: 24
-        radius: 2
-        color: "#313244"
-
-        Row {
-            id: cpu
-            property string cpuUsage: "0"
-            anchors.centerIn: parent
-            spacing: 8
-            Timer {
-                interval: 2000
-                running: true
-                repeat: true
-                onTriggered: cpuProcess.running = true
-            }
-
-            Process {
-                id: cpuProcess
-
-                command: ["./stats.sh"]
-
-                stdout: SplitParser {
-                    onRead: data => {
-                        try {
-                            var stats = JSON.parse(data);
-                            cpu.cpuUsage = stats.cpu;
-                        } catch (e) {
-                            console.error("JSON parse error :" + e);
-                        }
-                    }
-                }
-            }
-            Text {
-                anchors.verticalCenter: parent.verticalCenter
-                text: ""
-                color: "white"
-            }
-            Text {
-                anchors.verticalCenter: parent.verticalCenter
-                text: cpu.cpuUsage + "%"
-                color: "white"
-            }
-        }
-    }
+    RamWidget {}
+    CpuWidget {}
 
     Rectangle {
         width: power.implicitWidth + 20

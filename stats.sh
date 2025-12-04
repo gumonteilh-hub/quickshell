@@ -4,6 +4,7 @@ prev_total=0
 prev_idle=0
 
 while true; do
+  #CPU
   read -r cpu a b c idle rest < /proc/stat
 
   total=$((a + b + c + idle))
@@ -20,7 +21,12 @@ while true; do
   prev_total=$total
   prev_idle=$idle
 
-  echo "{\"cpu\": $cpu_usage}"
+  #RAM
+  mem_total=$(awk '/^MemTotal:/ {print $2}' /proc/meminfo)
+  mem_available=$(awk '/^MemAvailable:/ {print $2}' /proc/meminfo)
+  ram_usage=$(( (mem_total - mem_available) * 100 / mem_total ))
+
+  echo "{\"cpu\": $cpu_usage, \"ram\": $ram_usage}"
   
   sleep 2
 done
