@@ -7,8 +7,8 @@ import Quickshell.Io
 
 MyButton {
     id: root
-    width: 30
-    height: 24
+    implicitWidth: 30
+    implicitHeight: 24
     label: "⏻"
     radius: Theme.radiusMd
     color: Theme.red
@@ -24,8 +24,8 @@ MyButton {
         }
         visible: root.hovered || mouseArea.containsMouse
         color: "transparent"
-        width: content.width
-        height: content.height
+        implicitWidth: content.width
+        implicitHeight: content.height
 
         MouseArea {
             id: mouseArea

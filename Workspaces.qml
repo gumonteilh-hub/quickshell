@@ -45,7 +45,7 @@ Row {
 
             width: 24
             height: 24
-            color: modelData.id === Hyprland.focusedWorkspace.id || mouseArea.containsMouse ? Theme.mauve : Theme.surfaceLow
+            color: workspace.modelData.id === Hyprland.focusedWorkspace.id || mouseArea.containsMouse ? Theme.mauve : Theme.surfaceLow
 
             MouseArea {
                 id: mouseArea

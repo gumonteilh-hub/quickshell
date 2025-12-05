@@ -19,7 +19,7 @@ Scope {
             }
             color: "#1e1e2e"
 
-            height: 30
+            implicitHeight: 30
 
             Workspaces {}
 

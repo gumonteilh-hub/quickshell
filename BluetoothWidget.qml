@@ -29,8 +29,8 @@ MyButton {
         }
         visible: bluetoothButton.hovered
         color: "transparent"
-        width: content.width
-        height: content.height
+        implicitWidth: content.width
+        implicitHeight: content.height
 
         Rectangle {
             id: content
