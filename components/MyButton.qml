@@ -5,6 +5,7 @@ Rectangle {
     id: root
     required property string label
     property color labelColor: Theme.textPrimary
+    property color background
     property string tooltip
     signal clicked
     readonly property alias hovered: mouseArea.containsMouse
@@ -12,7 +13,12 @@ Rectangle {
     width: textArea.implicitWidth + Theme.paddingLg
     height: parent.height
     radius: Theme.radiusSm
-    color: mouseArea.containsMouse ? Theme.surfaceHigh : Theme.surfaceLow
+    color: {
+        if (background != "#000000")
+            return background;
+
+        return mouseArea.containsMouse ? Theme.surfaceHigh : Theme.surfaceLow;
+    }
     border.width: 1
     border.color: Theme.borderSubtle
 

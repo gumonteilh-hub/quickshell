@@ -2,7 +2,6 @@ import "./components/"
 import "./style/"
 import Quickshell.Services.UPower
 
-//UPower.displayDevice.timeToEmpty / 3600
 MyButton {
     visible: UPower.displayDevice.isLaptopBattery
     label: {
