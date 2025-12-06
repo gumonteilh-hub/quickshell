@@ -6,6 +6,7 @@ Row {
     anchors.margins: 6
     spacing: 5
 
+    LuminosityWidget {}
     InternetWidget {}
     BluetoothWidget {}
     RamWidget {}
