@@ -46,7 +46,7 @@ MyButton {
                 anchors.centerIn: parent
                 spacing: 5
                 Repeater {
-                    model: Bluetooth.devices.values
+                    model: Bluetooth.devices.values.filter(v => v.state === 1)
 
                     delegate: Row {
                         required property var modelData
