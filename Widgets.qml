@@ -7,6 +7,7 @@ Row {
     spacing: 5
 
     LuminosityWidget {}
+    AudioWidget {}
     InternetWidget {}
     BluetoothWidget {}
     RamWidget {}
