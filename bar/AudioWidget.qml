@@ -3,8 +3,8 @@ import QtQuick.Controls
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Pipewire
-import "./components/"
-import "./style/"
+import "../components/"
+import "../style/"
 
 MyButton {
   id: root
@@ -35,8 +35,6 @@ MyButton {
   PwObjectTracker {
     objects: [Pipewire.defaultAudioSink]
   }
-
-  //Math.round(Pipewire.defaultAudioSink.audio.volume * 100) + "%"
 
   PopupWindow {
     id: popup
@@ -100,23 +98,18 @@ MyButton {
               id: masterVolumeSlider
               from: 0
               to: 100
+              value: Pipewire.defaultAudioSink.audio.volume * 100 || 0
               stepSize: 1
               width: 150
               anchors.verticalCenter: parent.verticalCenter
 
               Component.onCompleted: {
+                console.log("ici");
                 masterVolumeSlider.value = Pipewire.defaultAudioSink.audio.volume * 100;
               }
 
-              onValueChanged: {
+              onMoved: {
                 Pipewire.defaultAudioSink.audio.volume = value / 100;
-              }
-
-              Connections {
-                target: Pipewire
-                function onDefaultAudioSinkChanged() {
-                  masterVolumeSlider.value = Pipewire.defaultAudioSink.audio.volume * 100;
-                }
               }
             }
 
