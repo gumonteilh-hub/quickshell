@@ -8,7 +8,7 @@ import "../style/"
 MyButton {
   id: bluetoothButton
   height: 24
-  label: "󰂯 " + Bluetooth.devices.values.length
+  label: "󰂯 " + Bluetooth.devices.values.filter(v => v.state === 1).length
 
   Process {
     id: nmtuiOpen
