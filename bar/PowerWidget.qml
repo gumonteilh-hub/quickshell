@@ -76,6 +76,12 @@ MyButton {
             color: Theme.yellow
             labelColor: Theme.crust
             label: "Verrouiller"
+            onClicked: lockProcess.running = true
+
+            Process {
+              id: lockProcess
+              command: ["hyprlock"]
+            }
           }
         }
       }
