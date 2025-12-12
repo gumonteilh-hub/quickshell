@@ -3,6 +3,7 @@ import "../components/"
 import "../style/"
 
 MyButton {
+  height: 24
   visible: UPower.displayDevice.isLaptopBattery
   label: {
     let batteryIcon = "";

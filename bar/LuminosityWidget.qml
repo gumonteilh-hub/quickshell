@@ -7,6 +7,7 @@ import "../style/"
 
 MyButton {
   id: root
+  height: 24
   label: ""
 
   PopupWindow {

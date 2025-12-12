@@ -15,7 +15,12 @@ Scope {
         left: true
         right: true
       }
-      color: "#1e1e2e"
+      margins {
+        right: 5
+        left: 5
+        top: 5
+      }
+      color: "transparent"
       implicitHeight: 30
 
       Workspaces {}

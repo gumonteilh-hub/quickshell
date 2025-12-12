@@ -8,6 +8,7 @@ import "../style/"
 
 MyButton {
   id: root
+  height: 24
   label: {
     let audio = Pipewire.defaultAudioSink.audio;
     if (audio.muted) {

@@ -4,6 +4,7 @@ import "../components/"
 
 MyButton {
   id: root
+  height: 24
   label: "  " + StatsProvider.ramUsage + "%"
 
   onClicked: {

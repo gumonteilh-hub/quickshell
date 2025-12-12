@@ -5,6 +5,7 @@ import "../style/"
 
 MyButton {
   id: root
+  height: 24
   property bool connected: false
   property string type: "none"
   label: {

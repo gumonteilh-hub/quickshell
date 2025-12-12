@@ -7,8 +7,8 @@ import "../style/"
 
 MyButton {
   id: root
-  implicitWidth: 30
-  implicitHeight: 24
+  width: 24
+  height: 24
   label: "⏻"
   radius: Theme.radiusMd
   color: Theme.red
