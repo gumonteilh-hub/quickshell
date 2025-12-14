@@ -30,8 +30,13 @@ Scope {
         anchors.centerIn: parent
       }
 
-      Widgets {
-        id: widgets
+      Row {
+        spacing: 25
+        anchors.right: parent.right
+        MediaPlayerWidget {}
+        Widgets {
+          id: widgets
+        }
       }
 
       Loader {

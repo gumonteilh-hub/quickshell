@@ -2,7 +2,6 @@ import QtQuick
 import "../style/"
 
 Rectangle {
-  anchors.right: parent.right
   height: row.implicitHeight + 6
   width: row.implicitWidth + 7
   color: Theme.base
