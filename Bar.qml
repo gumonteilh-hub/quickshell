@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import "./bar/"
 
 Scope {
   Variants {
@@ -29,7 +30,17 @@ Scope {
         anchors.centerIn: parent
       }
 
-      Widgets {}
+      Widgets {
+        id: widgets
+      }
+
+      Loader {
+        active: modelData === Quickshell.screens[0]
+        sourceComponent: NotificationServer {
+          parentWindow: barTopLevel
+          anchorItem: widgets
+        }
+      }
     }
   }
 }

@@ -105,7 +105,6 @@ MyButton {
               anchors.verticalCenter: parent.verticalCenter
 
               Component.onCompleted: {
-                console.log("ici");
                 masterVolumeSlider.value = Pipewire.defaultAudioSink.audio.volume * 100;
               }
 

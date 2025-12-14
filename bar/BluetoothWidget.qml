@@ -22,7 +22,6 @@ MyButton {
 
   PopupWindow {
     anchor {
-      window: barTopLevel
       item: bluetoothButton
       edges: Edges.Bottom
       gravity: Edges.Bottom
