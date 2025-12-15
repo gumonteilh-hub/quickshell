@@ -2,5 +2,11 @@ import QtQuick
 import Quickshell
 
 ShellRoot {
-  Bar {}
+  NotificationManager {
+    id: notificationManager
+  }
+
+  Bar {
+    notificationManager: notificationManager
+  }
 }

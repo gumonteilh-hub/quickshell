@@ -6,25 +6,21 @@ import "./style/"
 
 PopupWindow {
   id: root
-  property list<Notification> notifications: []
+  
+  required property var manager
   required property var parentWindow
   required property var anchorItem
+  
   anchor {
     window: parentWindow
     item: anchorItem
     edges: Edges.Bottom | Edges.Right
     gravity: Edges.Bottom
   }
-  visible: notifications.length > 0
+  
+  visible: manager.notifications.length > 0
   implicitWidth: content.width
   implicitHeight: content.height
-
-  NotificationServer {
-    onNotification: notification => {
-      notification.tracked = true;
-      root.notifications.push(notification);
-    }
-  }
   color: "transparent"
 
   Column {
@@ -34,7 +30,7 @@ PopupWindow {
     topPadding: 5
 
     Repeater {
-      model: root.notifications
+      model: root.manager.notifications
 
       delegate: Row {
         id: row
@@ -46,7 +42,7 @@ PopupWindow {
           running: true
           repeat: false
           onTriggered: {
-            root.notifications = root.notifications.filter(n => n.id != row.modelData.id);
+            root.manager.remove(row.modelData.id);
           }
         }
 
@@ -60,25 +56,33 @@ PopupWindow {
               return Theme.surfaceLow;
             case 1:
               return Theme.surfaceLow;
+            default:
+              return Theme.surfaceLow;
             }
           }
           border.color: Theme.borderStrong
           border.width: 5
           radius: Theme.radiusSm
           width: 350
-          height: 100
+          height: column.implicitHeight + 20
 
           Column {
+            id: column
             anchors.fill: parent
             anchors.margins: 10
 
             Item {
               width: parent.width
-              height: 26
+              height: title.implicitHeight
 
               Text {
+                id: title
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
+                maximumLineCount: 2
+                wrapMode: Text.Wrap
+                width: 300
+                elide: Text.ElideRight
                 font.pointSize: 14
                 text: modelData.summary
               }
@@ -92,7 +96,11 @@ PopupWindow {
             }
 
             Text {
-              topPadding: 10
+              topPadding: 11
+              width: 300
+              maximumLineCount: 5
+              wrapMode: Text.Wrap
+              elide: Text.ElideRight
               text: modelData.body
             }
           }
@@ -101,7 +109,7 @@ PopupWindow {
             hoverEnabled: true
             anchors.fill: parent
             onClicked: {
-              root.notifications = root.notifications.filter(n => n.id != row.modelData.id);
+              root.manager.remove(row.modelData.id);
             }
           }
         }

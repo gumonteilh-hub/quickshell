@@ -1,8 +1,11 @@
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import "./bar/"
 
 Scope {
+  property var notificationManager
+
   Variants {
     model: Quickshell.screens
     PanelWindow {
@@ -40,10 +43,13 @@ Scope {
       }
 
       Loader {
-        active: modelData === Quickshell.screens[0]
-        sourceComponent: NotificationServer {
-          parentWindow: barTopLevel
-          anchorItem: widgets
+        active: modelData.name === Hyprland.focusedMonitor?.name
+        sourceComponent: Component {
+          NotificationPopup {
+            parentWindow: barTopLevel
+            anchorItem: widgets
+            manager: notificationManager
+          }
         }
       }
     }
