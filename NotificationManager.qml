@@ -4,18 +4,24 @@ import Quickshell.Services.Notifications
 
 QtObject {
     id: root
-    property var notifications: []
+    property alias notifications: notificationModel
+
+    property ListModel notificationModel: ListModel {
+        id: notificationModel
+    }
 
     function add(n) {
         n.tracked = true
-        var list = notifications.slice()
-        list.push(n)
-        notifications = list
+        notificationModel.append({"notification": n})
     }
 
     function remove(id) {
-        var list = notifications.filter(n => n.id !== id)
-        notifications = list
+        for (var i = 0; i < notificationModel.count; i++) {
+            if (notificationModel.get(i).notification.id === id) {
+                notificationModel.remove(i)
+                break
+            }
+        }
     }
 
     property var server: NotificationServer {

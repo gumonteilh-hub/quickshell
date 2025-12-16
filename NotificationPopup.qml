@@ -1,24 +1,23 @@
 import QtQuick
 import Quickshell
-import Quickshell.Services.Notifications
 import Quickshell.Widgets
 import "./style/"
 
 PopupWindow {
   id: root
-  
+
   required property var manager
   required property var parentWindow
   required property var anchorItem
-  
+
   anchor {
     window: parentWindow
     item: anchorItem
     edges: Edges.Bottom | Edges.Right
     gravity: Edges.Bottom
   }
-  
-  visible: manager.notifications.length > 0
+
+  visible: manager.notifications.count > 0
   implicitWidth: content.width
   implicitHeight: content.height
   color: "transparent"
@@ -34,22 +33,26 @@ PopupWindow {
 
       delegate: Row {
         id: row
-        required property var modelData
+        required property var model
+
+        property var notif: model.notification
 
         Timer {
           id: expireTimer
-          interval: row.modelData.expireTimeout > 0 ? row.modelData.expireTimeout : 10000
-          running: true
+          interval: row.notif && row.notif.expireTimeout > 0 ? row.notif.expireTimeout : 10000
+          running: row.notif !== null
           repeat: false
           onTriggered: {
-            root.manager.remove(row.modelData.id);
+            if (row.notif) root.manager.remove(row.notif.id);
           }
         }
 
         anchors.horizontalCenter: content.horizontalCenter
         Rectangle {
+          visible: row.notif !== null
           color: {
-            switch (modelData.urgency) {
+            if (!row.notif) return Theme.surfaceLow;
+            switch (row.notif.urgency) {
             case 2:
               return Theme.red;
             case 0:
@@ -84,13 +87,13 @@ PopupWindow {
                 width: 300
                 elide: Text.ElideRight
                 font.pointSize: 14
-                text: modelData.summary
+                text: row.notif ? row.notif.summary : ""
               }
 
               IconImage {
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
-                source: Quickshell.iconPath(modelData.appIcon, "application-x-executable")
+                source: row.notif ? Quickshell.iconPath(row.notif.appIcon, "application-x-executable") : ""
                 implicitSize: 26
               }
             }
@@ -101,7 +104,7 @@ PopupWindow {
               maximumLineCount: 5
               wrapMode: Text.Wrap
               elide: Text.ElideRight
-              text: modelData.body
+              text: row.notif ? row.notif.body : ""
             }
           }
 
@@ -109,7 +112,7 @@ PopupWindow {
             hoverEnabled: true
             anchors.fill: parent
             onClicked: {
-              root.manager.remove(row.modelData.id);
+              if (row.notif) root.manager.remove(row.notif.id);
             }
           }
         }

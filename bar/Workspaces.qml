@@ -47,12 +47,12 @@ Rectangle {
       delegate: MyButton {
         id: workspace
         required property var modelData
-        label: workspace.modelData.id === Hyprland.focusedWorkspace.id ? "󱓻" : workspace.modelData.id === -98 ? "" : workspace.modelData.id
-        labelColor: workspace.modelData.id === Hyprland.focusedWorkspace.id ? Theme.crust : Theme.text
+        label: modelData.id === Hyprland.focusedWorkspace.id ? "󱓻" : workspace.modelData.id === -98 ? "" : modelData.id
+        labelColor: modelData.id === Hyprland.focusedWorkspace.id ? Theme.crust : Theme.text
 
         width: 24
         height: 24
-        color: workspace.modelData.id === Hyprland.focusedWorkspace.id || mouseArea.containsMouse ? Theme.mauve : Theme.surfaceLow
+        color: modelData.id === Hyprland.focusedWorkspace.id || mouseArea.containsMouse ? Theme.mauve : Theme.surfaceLow
 
         MouseArea {
           id: mouseArea

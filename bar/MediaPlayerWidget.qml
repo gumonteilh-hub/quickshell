@@ -19,7 +19,7 @@ Rectangle {
     anchors.horizontalCenter: parent.horizontalCenter
     height: 30
     spacing: 8
-    Component.onCompleted: console.log(JSON.stringify(mediaWidget.player))
+
     Text {
       anchors.verticalCenter: parent.verticalCenter
       color: Theme.subtext1
