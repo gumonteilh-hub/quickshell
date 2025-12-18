@@ -43,7 +43,8 @@ PopupWindow {
           running: row.notif !== null
           repeat: false
           onTriggered: {
-            if (row.notif) root.manager.remove(row.notif.id);
+            if (row.notif)
+              root.manager.remove(row.notif.id);
           }
         }
 
@@ -51,7 +52,8 @@ PopupWindow {
         Rectangle {
           visible: row.notif !== null
           color: {
-            if (!row.notif) return Theme.surfaceLow;
+            if (!row.notif)
+              return Theme.surfaceLow;
             switch (row.notif.urgency) {
             case 2:
               return Theme.red;
@@ -112,7 +114,8 @@ PopupWindow {
             hoverEnabled: true
             anchors.fill: parent
             onClicked: {
-              if (row.notif) root.manager.remove(row.notif.id);
+              if (row.notif)
+                root.manager.remove(row.notif.id);
             }
           }
         }
