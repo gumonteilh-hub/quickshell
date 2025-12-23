@@ -16,13 +16,11 @@ Rectangle {
     if (withDialogOnHover && hovered) {
       return 0;
     }
-    return Theme.radiusSm;
   }
   bottomLeftRadius: {
     if (withDialogOnHover && hovered) {
       return 0;
     }
-    return Theme.radiusSm;
   }
   radius: Theme.radiusSm
   color: {

@@ -27,7 +27,8 @@ MyButton {
       edges: Edges.Bottom
       gravity: Edges.Bottom
     }
-    visible: bluetoothButton.hovered
+    visible: bluetoothButton.hovered && Bluetooth.devices.values.filter(v => v.state === 1).length > 0
+
     color: "transparent"
     implicitWidth: content.width
     implicitHeight: content.height
