@@ -5,13 +5,25 @@ Rectangle {
   id: root
   required property string label
   property color labelColor: Theme.textPrimary
+  property bool withDialogOnHover: false
   property color background
-  property string tooltip
   signal clicked
   readonly property alias hovered: mouseArea.containsMouse
 
   width: textArea.implicitWidth + Theme.paddingLg
   height: parent.height
+  bottomRightRadius: {
+    if (withDialogOnHover && hovered) {
+      return 0;
+    }
+    return Theme.radiusSm;
+  }
+  bottomLeftRadius: {
+    if (withDialogOnHover && hovered) {
+      return 0;
+    }
+    return Theme.radiusSm;
+  }
   radius: Theme.radiusSm
   color: {
     if (background != "#000000")
@@ -20,7 +32,13 @@ Rectangle {
     return mouseArea.containsMouse ? Theme.surfaceHigh : Theme.surfaceLow;
   }
   border.width: 1
-  border.color: Theme.borderSubtle
+  border.color: {
+    if (withDialogOnHover && hovered) {
+      return Theme.surfaceHigh;
+    }
+
+    return Theme.borderSubtle;
+  }
 
   Text {
     id: textArea

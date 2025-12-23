@@ -9,6 +9,7 @@ MyButton {
   id: bluetoothButton
   height: 24
   label: "󰂯 " + Bluetooth.devices.values.filter(v => v.state === 1).length
+  withDialogOnHover: true
 
   Process {
     id: nmtuiOpen
@@ -33,9 +34,7 @@ MyButton {
 
     Rectangle {
       id: content
-      color: Theme.overlayLow
-      border.color: Theme.borderStrong
-      border.width: 3
+      color: Theme.surfaceHigh
       radius: Theme.radiusSm
       width: column.width + Theme.paddingLg
       height: column.height + Theme.paddingLg
@@ -43,13 +42,13 @@ MyButton {
       Column {
         id: column
         anchors.centerIn: parent
-        spacing: 5
+        spacing: Theme.paddingMd
         Repeater {
           model: Bluetooth.devices.values.filter(v => v.state === 1)
 
           delegate: Row {
             required property var modelData
-            spacing: 8
+            spacing: Theme.paddingMd
 
             Text {
               width: 14
@@ -60,23 +59,35 @@ MyButton {
                   return "";
                 } else if (modelData.icon.includes("mouse")) {
                   return "󰍽";
+                } else if (modelData.icon.includes("headset")) {
+                  return "";
                 }
                 return "";
               }
-              font.pixelSize: 11
+              font.pixelSize: Theme.fontSm
               color: "white"
             }
             Text {
               width: 80
               elide: Text.ElideRight
               verticalAlignment: Text.AlignVCenter
-              font.pixelSize: 11
+              font.pixelSize: Theme.fontSm
               text: modelData.deviceName
               color: "white"
             }
             Text {
               verticalAlignment: Text.AlignVCenter
-              font.pixelSize: 11
+              font.pixelSize: Theme.fontSm
+              color: {
+                const battery = Math.trunc(modelData.battery * 100);
+                if (battery < 20) {
+                  return Theme.red;
+                }
+                if (battery < 40) {
+                  return Theme.peach;
+                }
+                return Theme.green;
+              }
               text: {
                 let batteryIcon = "";
                 const battery = Math.trunc(modelData.battery * 100);
@@ -98,13 +109,12 @@ MyButton {
                   batteryIcon = "󰥅 ";
                 } else if (battery < 90) {
                   batteryIcon = "󰥆 ";
-                } else if (battery < 100) {
+                } else if (battery <= 100) {
                   batteryIcon = "󰥈 ";
                 }
 
                 return batteryIcon + battery + "%";
               }
-              color: "white"
             }
           }
         }
